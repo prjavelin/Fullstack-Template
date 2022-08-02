@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const bodyParser = require('body-parser')
 const MongoClient = require('mongodb').MongoClient
 require('dotenv').config()
 const PORT = 8000
@@ -32,6 +33,15 @@ app.get('/', async (request, response )=>{
     }
 
 }) 
+
+app.post('/quotes',(req,res)=> {
+    collection.insertOne(req.body)
+    .then(result =>{
+        res.redirect('/')
+    })
+.catch(error => console.log(error))
+})
+
 
 
 
